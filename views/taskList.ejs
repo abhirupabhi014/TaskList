@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!--
+  If you don't want to download and host jQuery yourself, you can include it from a CDN (Content Delivery Network).
+  Faster loading time
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  -->
+  <script
+  src="https://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
+
+  <script>
+    function function1(){
+
+      $('ul li').click(function(e)
+        {
+          var item = $(this).text().replace(/ /g, "-");
+          $.ajax({
+            type: 'DELETE',
+            url: '/' + item,
+            success: function(tasks){
+              //do something with the data via front-end framework
+              location.reload();
+            }
+          });
+        });
+
+
+    }
+  </script>
+  <link href="/assets/styles.css" rel="stylesheet" type="text/css" />
+
+  <title>Task List</title>
+</head>
+
+<body>
+  <h1>Task List</h1>
+  <div id="todo-table">
+
+    <form method="post">
+      <input type="text" name="item" placeholder="Add new item" required/>
+      <button type="submit">Add Item</button>
+    </form>
+
+    <ul>
+        <% for(var i = 0;i<tasks.length; i++){ %>
+        <li onclick="function1();"><%=tasks[i].item%></li>
+        <% } %>
+    </ul>
+  </div>
+
+
+</body>
+
+</html>
